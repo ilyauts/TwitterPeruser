@@ -7,6 +7,7 @@ from os import path
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+import re
 
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from TwitterAPI import TwitterAPI, TwitterRestPager, TwitterRequestError, TwitterConnectionError
@@ -36,7 +37,7 @@ def pagingCall(server, query='blockchain', key='Tweets', count = 200, limit = 20
     for item in r.get_iterator():
         if 'text' in item:
             # Pass-in tweets into a list
-            server.rpush(key, item['text'])
+            server.rpush(key, re.sub(r"http\S+", "", item['text']))
 
             if(numEntries % 100 == 0):
                 print 'Entries so far', numEntries
@@ -58,7 +59,7 @@ def iterateTweets(sentiment, server, pager):
     for tweet in pager.get_iterator():
         count += 1
         if 'text' in tweet:
-            server.rpush(sentiment, tweet['text'])
+            server.rpush(sentiment, re.sub(r"http\S+", "", item['text']))
 
             # Print progress periodically
             if(count % 100 == 0):
@@ -68,7 +69,7 @@ def joinAndEncode(wordList):
     return urllib.quote_plus(''.join(wordList))
 
 # Paging sentiment comparison
-def sentimentComparison(server, query1 = 'Hillary Clinton', query2 = 'Donald Trump', count = 50):
+def sentimentComparison(server, query1 = 'python', query2 = 'javascript', count = 50):
     # Keep tabs on the number of entries
     numEntries = 1
 
