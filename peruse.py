@@ -7,7 +7,6 @@ from os import path
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
 
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from TwitterAPI import TwitterAPI, TwitterRestPager, TwitterRequestError, TwitterConnectionError
@@ -137,27 +136,3 @@ def deleteKey(server, key):
     return
 
 api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret, 'oAuth2')
-
-# Make a single call
-query = 'Donald Trump'
-key = 'Tweets'
-numTweets = 50
-limit = 250
-
-# Take user input into account
-if(len(sys.argv) > 1):
-    query = sys.argv[1]
-
-# if(len(sys.argv) > 2):
-#     limit = int(sys.argv[2])
-
-# Start by deleting the old key
-deleteKey(r_server, key)
-
-# Move on to getting tweets
-pagingCall(r_server, query, key, numTweets, limit)
-tweets_text = getTweetsList(r_server, key)
-
-generateWordCloud(''.join(tweets_text))
-
-# sentimentComparison(r_server)
