@@ -8,6 +8,8 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import re
+import pandas as pd
+import prettypandas as pp
 
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from TwitterAPI import TwitterAPI, TwitterRestPager, TwitterRequestError, TwitterConnectionError
@@ -120,6 +122,26 @@ def generateWordCloud(text):
     plt.imshow(wc)
     plt.axis("off")
     plt.show()
+
+def generateTable(text):
+    # Start by getting a frequency dictionary
+    d = path.dirname(__file__)
+
+    cloud_coloring = np.array(Image.open(path.join(d, "us-mask-white.png")))
+    stopwords = set(STOPWORDS)
+    stopwords.add("said")
+
+    wc = WordCloud(background_color="black", max_words=2000, mask=cloud_coloring,
+                   stopwords=stopwords, max_font_size=40, random_state=42)
+
+    frequenciesDict = wc.process_text(text)
+    frequencies = pd.Series(frequenciesDict)
+    frequencies.index.name = 'Word'
+
+    print frequencies.index
+
+    # Make table
+    (pp.PrettyPandas(frequencies))
 
 def getTweetsList(server, key):
     # Returns all tweets

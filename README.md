@@ -29,12 +29,16 @@ To install:
 
     redis-cli ping
 
-5) Install wordcloud:
+5) Install PrettyPandas:
+
+     pip install prettypandas
+
+6) Install wordcloud:
 
     pip install wordcloud
 
-6) Copy keys.template and call it keys.py. Replace bracketed values in that file with your secret Twitter keys
+7) Copy keys.template and call it keys.py. Replace bracketed values in that file with your secret Twitter keys
 
-7) Run example which uses the module:
+8) Run example which uses the module:
 
     python peruseDriver.py [query in quotes] [number of tweets to be used]
