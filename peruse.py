@@ -135,13 +135,16 @@ def generateTable(text):
                    stopwords=stopwords, max_font_size=40, random_state=42)
 
     frequenciesDict = wc.process_text(text)
-    frequencies = pd.Series(frequenciesDict)
-    frequencies.index.name = 'Word'
 
-    print frequencies.index
+    words = frequenciesDict.keys()
+    freq = frequenciesDict.values()
+
+    frequencies = pd.DataFrame({ 'words' : words, 'frequencies' : freq })
+
+    print frequencies
 
     # Make table
-    (pp.PrettyPandas(frequencies))
+    # (pp.PrettyPandas(frequencies).total())
 
 def getTweetsList(server, key):
     # Returns all tweets
