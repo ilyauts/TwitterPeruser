@@ -35,6 +35,6 @@ To install:
 
 6) Copy keys.template and call it keys.py. Replace bracketed values in that file with your secret Twitter keys
 
-7) Run application:
+7) Run example which uses the module:
 
-    python peruse.py [query in quotes] [number of tweets to be used]
+    python peruseDriver.py [query in quotes] [number of tweets to be used]
