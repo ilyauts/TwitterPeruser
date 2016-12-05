@@ -1,0 +1,8 @@
+# Copy and paste this file into a new file called keys.py
+# Replace bracketed values with keys you generated using https://dev.twitter.com/
+
+# Secret keys
+consumer_key = [your_key]
+consumer_secret = [your_key]
+access_token_key = [your_key]
+access_token_secret = [your_key]
