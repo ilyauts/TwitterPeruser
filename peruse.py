@@ -9,7 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import re
 import pandas as pd
-import prettypandas as pp
 
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from TwitterAPI import TwitterAPI, TwitterRestPager, TwitterRequestError, TwitterConnectionError
@@ -140,11 +139,11 @@ def generateTable(text):
     freq = frequenciesDict.values()
 
     frequencies = pd.DataFrame({ 'words' : words, 'frequencies' : freq })
+    frequencies.sort_values('frequencies', ascending = False, inplace = True)
 
-    print frequencies
-
-    # Make table
-    # (pp.PrettyPandas(frequencies).total())
+    print '\nTop 5 Terms\n'
+    print frequencies.head().to_string(index = False)
+    print '\n'
 
 def getTweetsList(server, key):
     # Returns all tweets
