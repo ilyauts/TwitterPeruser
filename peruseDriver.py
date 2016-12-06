@@ -26,7 +26,7 @@ ps.pagingCall(r_server, query, key, numTweets, limit)
 tweets_text = ps.getTweetsList(r_server, key)
 
 ps.generateWordCloud(''.join(tweets_text))
-ps.generateTable(''.join(tweets_text))
+ps.generateTable(''.join(tweets_text), 10)
 
 
 # sentimentComparison(r_server)

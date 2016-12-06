@@ -122,7 +122,7 @@ def generateWordCloud(text):
     plt.axis("off")
     plt.show()
 
-def generateTable(text):
+def generateTable(text, n=5):
     # Start by getting a frequency dictionary
     d = path.dirname(__file__)
 
@@ -142,7 +142,7 @@ def generateTable(text):
     frequencies.sort_values('frequencies', ascending = False, inplace = True)
 
     print '\nTop 5 Terms\n'
-    print frequencies.head().to_string(index = False)
+    print frequencies.head(n = n).to_string(index = False)
     print '\n'
 
 def getTweetsList(server, key):
